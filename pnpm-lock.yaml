@@ -54,6 +54,9 @@ catalogs:
     typescript:
       specifier: 5.9.2
       version: 5.9.2
+    zod:
+      specifier: ^4.1.12
+      version: 4.4.3
 
 importers:
 
@@ -114,19 +117,34 @@ importers:
 
   apps/api:
     dependencies:
+      '@repo/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contract
       hono:
-        specifier: ^4.12.18
+        specifier: ^4.12.14
         version: 4.12.18
     devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
       wrangler:
         specifier: ^4.4.0
         version: 4.88.0
 
   apps/web:
     dependencies:
+      '@repo/api':
+        specifier: workspace:*
+        version: link:../api
+      '@repo/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contract
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      hono:
+        specifier: ^4.12.14
+        version: 4.12.18
       next:
         specifier: 'catalog:'
         version: 16.2.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -161,6 +179,25 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.2.4
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  packages/contract:
+    dependencies:
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.1(jiti@2.7.0)
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -2182,6 +2219,9 @@ packages:
   youch@4.1.0-beta.10:
     resolution: {integrity: sha512-rLfVLB4FgQneDr0dv1oddCVZmKjcJ6yX6mS4pU82Mq/Dt9a3cLZQ62pDBL4AUO+uVrCvtWz3ZFUL2HFAFJ/BXQ==}
 
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -4155,3 +4195,5 @@ snapshots:
       '@speed-highlight/core': 1.2.15
       cookie: 1.1.1
       youch-core: 0.3.3
+
+  zod@4.4.3: {}
